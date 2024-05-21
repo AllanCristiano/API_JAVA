@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping(path = "/tasks")
 public class ApiController {
 
     private List<String> tasks = new ArrayList<>();
@@ -19,18 +20,18 @@ public class ApiController {
         this.objectMapper = objectMapper;
     }
 
-    @GetMapping(path = "/tasks")
+    @GetMapping()
     public ResponseEntity<String> helloWord() throws JsonProcessingException {
         return ResponseEntity.ok(objectMapper.writeValueAsString(tasks));
     }
 
-    @PostMapping(path = "/tasks")
+    @PostMapping()
     public ResponseEntity<Void> createTask(@RequestBody String task){
         tasks.add(task);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping(path = "/tasks")
+    @DeleteMapping()
     public ResponseEntity<Void> clearTasks(){
         tasks = new ArrayList<>();
         return ResponseEntity.ok().build();
